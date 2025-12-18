@@ -22,30 +22,33 @@ The objectives of this project are to:
 ---
 
 ## 📂 Dataset Description
-Each record in the dataset represents a single crime incident.
+Each record in the dataset represents a single reported crime incident in Karachi. The dataset, karachi_crime_2020_2025, is obtained from Kaggle and covers crimes reported between 2020 and 2025. It captures spatial, temporal, and severity information of various crime incidents, suitable for academic purposes, exploratory data analysis, and predictive modeling.
 
-### Attributes Used
-- **Crime_Type**: Type of crime (e.g., theft, assault, burglary)
-- **Location**: Area or zone where the crime occurred
-- **Time**: Hour of the incident
-- **Day**: Day of the week
-- **Severity**: Level of crime severity (Low / High)
-
-📌 *The dataset can be sourced from open government crime datasets or simulated for academic purposes.*
+## 🧾 Features Used
+**Incident Type:** Type of crime (e.g., theft, robbery, assault)
+**Geographical Location:** Area where the incident occurred (town, subdivision, latitude, longitude)
+**Temporal Attributes:**
+Date of occurrence
+Time of occurrence (hour)
+Day of the week
+**Severity Score:** Numeric score representing the seriousness of the crime
+**Zone Indicators:** Binary flags representing crime zones (Red, Orange, Yellow, Green, White)
+**Priority & Rank Metrics:**
+Town priority rank
+Subdivision priority rank
+Overall crime rank
 
 ---
 
-## 🧹 Data Preprocessing
-Before applying data mining techniques, the following preprocessing steps are performed:
+## 🧹 Data Preprocessing & Feature Engineering
+Before analysis and modeling, the following preprocessing steps are applied:
+**Data cleaning:** Handling missing or invalid values and removing duplicate records.
+**Data type optimization:** Converting date fields to datetime format, casting categorical attributes to categorical type.
+**Categorical feature encoding:** Encoding incident type, location, and temporal categories for machine learning models.
+**Numerical feature processing:** Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
+**Feature engineering:** Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
 
-- Handling missing values
-- Encoding categorical variables (Crime_Type, Location, Day)
-- Feature scaling for numerical attributes
-- Feature engineering:
-  - Peak vs off-peak hours
-  - Weekday vs weekend
-
-These steps ensure data quality and improve model performance.
+These steps ensure data consistency, realism in synthetic patterns, and improved performance of crime pattern analysis and hotspot detection models.
 
 ---
 

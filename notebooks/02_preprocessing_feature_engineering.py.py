@@ -1,4 +1,7 @@
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 
 # 1. Load Dataset
 df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-raw/karachi_crime_2020_2025.csv')
@@ -37,6 +40,49 @@ df.isnull().sum()
 df.describe()
 
 # 5. Encode Categorical Variables
+cat_cols = ['TOWN', 'TOWN_RISK_LEVEL', 'SUBDIVISION', 'SUBDIVISION_RISK_LEVEL', 'CRIME_TYPE']
+
+# Label encoding
+le_df = df.copy()
+le = LabelEncoder()
+for col in cat_cols:
+    le_df[col] = le.fit_transform(le_df[col])
+le_df.head()
+
+# One-hot encoding (if needed for KMeans clustering)
+ohe = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
+ohe_encoded = ohe.fit_transform(df[cat_cols])
+
+# Convert the encoded array to a DataFrame
+encoded_df = pd.DataFrame(
+    ohe_encoded, 
+    columns=ohe.get_feature_names_out(cat_cols),
+    index=df.index
+)
+df = df.drop(columns=cat_cols) # Drop original categorical columns
+df = pd.concat([df, encoded_df], axis=1) # Concatenate the one-hot encoded columns
+df.head()
+
 # 6. Scale Numeric Features
+numeric_cols_to_scale = [
+    'TOWN_PRIORITY_RANK', 
+    'SUBDIVISION_PRIORITY_RANK', 
+    'SEVERITY_SCORE', 
+    'LATITUDE', 
+    'LONGITUDE'
+]
+
+scaler = StandardScaler()
+le_df[numeric_cols_to_scale] = scaler.fit_transform(le_df[numeric_cols_to_scale]) # scale label encoded numeric columns
+df[numeric_cols_to_scale] = scaler.fit_transform(df[numeric_cols_to_scale]) # scale one-hot encoded numeric columns
+
+# Verify scaling
+le_df[numeric_cols_to_scale].mean()
+le_df[numeric_cols_to_scale].std()
+df[numeric_cols_to_scale].mean()
+df[numeric_cols_to_scale].std()
+
 # 7. Save Preprocessed Dataset
-# 8. Quick Visual Checks
+le_df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_label_encoded.csv', index=False)
+df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_one_hot_encoded.csv', index=False)
+

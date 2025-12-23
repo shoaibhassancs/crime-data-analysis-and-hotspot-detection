@@ -1,6 +1,6 @@
 # Crime Data Analysis & Hotspot Detection
 
-## 📌 Project Overview
+## Project Overview
 Crime analysis plays a vital role in public safety and urban planning. With the increasing availability of crime-related data, data mining techniques can be applied to uncover hidden patterns, crime hotspots, and temporal trends.
 
 This project focuses on analyzing crime data to:
@@ -12,7 +12,7 @@ The project integrates **Data Mining techniques** (clustering, classification, t
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 The objectives of this project are to:
 - Identify crime hotspots based on location and time
 - Classify crime incidents based on severity levels
@@ -21,66 +21,70 @@ The objectives of this project are to:
 
 ---
 
-## 📂 Dataset Description
+## Dataset Description
 Each record in the dataset represents a single reported crime incident in Karachi. The dataset, karachi_crime_2020_2025, is obtained from Kaggle and covers crimes reported between 2020 and 2025. It captures spatial, temporal, and severity information of various crime incidents, suitable for academic purposes, exploratory data analysis, and predictive modeling.
 
-## 🧾 Features Used
-**Incident Type:** Type of crime (e.g., theft, robbery, assault)
-**Geographical Location:** Area where the incident occurred (town, subdivision, latitude, longitude)
-**Temporal Attributes:**
+## Features Used
+**Incident Type**: Type of crime (e.g., theft, robbery, assault)
+**Geographical Location**: Area where the incident occurred (town, subdivision, latitude, longitude)
+**Temporal Attributes**:
 Date of occurrence
 Time of occurrence (hour)
 Day of the week
-**Severity Score:** Numeric score representing the seriousness of the crime
-**Zone Indicators:** Binary flags representing crime zones (Red, Orange, Yellow, Green, White)
-**Priority & Rank Metrics:**
+**Severity Score**: Numeric score representing the seriousness of the crime
+**Zone Indicators**: Binary flags representing crime zones (Red, Orange, Yellow, Green, White)
+**Priority & Rank Metrics**:
 Town priority rank
 Subdivision priority rank
 Overall crime rank
 
 ---
 
-## 🧹 Data Preprocessing & Feature Engineering
+## Data Preprocessing & Feature Engineering
 Before analysis and modeling, the following preprocessing steps are applied:
-**Data cleaning:** Handling missing or invalid values and removing duplicate records.
-**Data type optimization:** Converting date fields to datetime format, casting categorical attributes to categorical type.
-**Categorical feature encoding:** Encoding incident type, location, and temporal categories for machine learning models.
-**Numerical feature processing:** Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
-**Feature engineering:** Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
+**Data cleaning**: Handling missing or invalid values and removing duplicate records.
+**Data type optimization**: Converting date fields to datetime format, casting categorical attributes to categorical type.
+**Categorical feature encoding**: Encoding incident type, location, and temporal categories for machine learning models.
+**Numerical feature processing**: Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
+**Feature engineering**: Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
 
 These steps ensure data consistency, realism in synthetic patterns, and improved performance of crime pattern analysis and hotspot detection models.
 
 ---
 
-## 🧠 Data Mining Techniques
+## Data Mining Techniques
 
-### 1️⃣ Clustering – Crime Hotspot Detection
+### Clustering – Crime Hotspot Detection
 Clustering is used to identify crime hotspots without predefined labels.
 
 - **Algorithm Used**: K-Means Clustering
-- **Features**:
-  - Location (encoded)
-  - Time
-  - Crime frequency
+- **Features Used for Clustering**:
+  - Location (Latitude, Longitude)
 
 **Outcome**:
-- Identification of high-crime zones
-- Discovery of areas with frequent crime occurrences during specific time periods
+- Identification of high-crime zones (hotspots)
+- Ranking clusters by crime intensity
+- Linking clusters to towns/subdivisions for actionable insights
 
 ---
 
-### 2️⃣ Classification – Crime Severity Prediction
-Classification is used to predict whether a crime incident is of high or low severity.
+### Classification – Crime Severity Prediction
+Classification is used to predict whether a crime incident is of high, medium, or low severity.
 
-- **Target Variable**: Severity (High / Low)
-- **Algorithms Used**:
-  - Logistic Regression
-  - Decision Tree Classifier
+- **Target Variable**: SEVERITY (High / Medium / Low)
+- **Algorithms Used**: Random Forest Classifier (with class balancing to handle class imbalance)
+- **Features Used**:
+  -  Location: LATITUDE, LONGITUDE
+  -  Crime details: CRIME_TYPE, TOWN, SUBDIVISION
+  -  Temporal: HOUR, DAY_OF_WEEK, MONTH, IS_PEAK_HOUR, IS_WEEKEND
 - **Evaluation Metrics**:
-  - Accuracy
+  - Accuracy (~86%)
   - Confusion Matrix
+  - Classification Report (Precision, Recall, F1-score)
 
-This analysis helps understand factors contributing to severe crimes.
+**Insights**:
+  - Random Forest identified which features most influence severity.
+  - Model performs well across all classes, enabling prioritization of high-severity crimes.
 
 ---
 

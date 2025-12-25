@@ -88,7 +88,7 @@ Classification is used to predict whether a crime incident is of high, medium, o
 
 ---
 
-### 3️⃣ Trend Mining
+### Trend Mining
 Trend analysis was performed to uncover temporal crime patterns:
 - **Crime Frequency by Day of the Week**: Revealed which weekdays have higher incidents.
 - **Monthly Crime Trends**: Identified seasonal patterns within each year.

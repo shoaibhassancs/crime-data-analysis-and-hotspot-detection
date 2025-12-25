@@ -5,11 +5,11 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-raw_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_cleaned.csv')
+raw_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_01_karachi_crime_2020_2025_cleaned.csv')
 raw_df.head().columns
 raw_df.head()
 
-le_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_label_encoded.csv')
+le_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_02_karachi_crime_2020_2025_label_encoded.csv')
 le_df.head().columns
 le_df.head()
 
@@ -50,7 +50,6 @@ print("Accuracy:", accuracy_score(y_test_enc, y_pred)) # overall correctness
 print("Confusion Matrix:\n", confusion_matrix(y_test_enc, y_pred)) # see which classes are confused
 print("Classification Report:\n", classification_report(y_test_enc, y_pred, target_names=le.classes_)) # precision, recall, f1-score
 
-
 # -----------------------------
 # Feature Importance Visualization
 # -----------------------------
@@ -72,4 +71,4 @@ plt.xlabel('Importance')
 plt.title('Feature Importance for Crime Severity Classification')
 plt.gca().invert_yaxis()  # highest importance on top
 plt.show()
-plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/crime_severity_feature_importance.png')
+plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/04_01_crime_severity_feature_importance.png')

@@ -32,10 +32,10 @@ def plot_and_save(series, title, xlabel, ylabel, filename, top_n=None, figsize=(
     plt.show()
 
 # Plotting
-plot_and_save(df['SEVERITY'], 'Severity Distribution', 'Severity', 'Count', 'severity_distribution.png', figsize=(8,6))
+plot_and_save(df['SEVERITY'], 'Severity Distribution', 'Severity', 'Count', '01_01_severity_distribution.png', figsize=(8,6))
 
-plot_and_save(df['CRIME_TYPE'], 'Crime Type Distribution', 'Crime Type', 'Count', 'crime_type_distribution.png', figsize=(12,6))
+plot_and_save(df['CRIME_TYPE'], 'Crime Type Distribution', 'Crime Type', 'Count', '01_02_crime_type_distribution.png', figsize=(12,6))
 
-plot_and_save(df['TOWN'], 'Crime Distribution by Town', 'Town', 'Number of Crimes', 'crime_by_town.png')
+plot_and_save(df['TOWN'], 'Crime Distribution by Town', 'Town', 'Number of Crimes', '01_03_crime_by_town.png')
 
-plot_and_save(df['SUBDIVISION'], 'Top 20 Subdivisions by Crime Count', 'Subdivision', 'Number of Crimes', 'crime_by_subdivision.png', top_n=20)
+plot_and_save(df['SUBDIVISION'], 'Top 20 Subdivisions by Crime Count', 'Subdivision', 'Number of Crimes', '01_04_crime_by_subdivision.png', top_n=20)

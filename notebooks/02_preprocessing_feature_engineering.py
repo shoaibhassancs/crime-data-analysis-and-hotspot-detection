@@ -43,6 +43,9 @@ df['IS_PEAK_HOUR'] = df['HOUR'].apply(lambda x: 1 if 17 <= x <= 20 else 0) # Def
 df['IS_WEEKEND'] = df['DAY_OF_WEEK'].apply(lambda x: 1 if x >= 5 else 0) # Define weekend as Saturday (5) and Sunday (6)
 df[['HOUR', 'DAY_OF_WEEK', 'MONTH', 'YEAR', 'IS_PEAK_HOUR', 'IS_WEEKEND']].head(10)
 
+# save the cleaned dataset
+df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_01_karachi_crime_2020_2025_cleaned.csv', index=False)
+
 df = df.drop(columns=['INCIDENT_ID', 'SOURCE', 'SEVERITY', 'RISK_ZONE']) # Drop unnecessary columns
 
 df.isnull().sum()
@@ -98,6 +101,5 @@ df[numeric_cols_to_scale].std()
 # -----------------------------
 # Save Preprocessed Dataset
 # -----------------------------
-le_df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_label_encoded.csv', index=False)
-df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_cleaned.csv', index=False)
-
+df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_02_karachi_crime_2020_2025_label_encoded.csv', index=False)
+le_df.to_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_03_karachi_crime_2020_2025_label_encoded.csv', index=False)

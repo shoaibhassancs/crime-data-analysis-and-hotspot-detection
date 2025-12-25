@@ -3,9 +3,9 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_one_hot_encoded.csv')
-le_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_label_encoded.csv')
-raw_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_cleaned.csv')
+df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_03_karachi_crime_2020_2025_one_hot_encoded.csv')
+le_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_02_karachi_crime_2020_2025_label_encoded.csv')
+raw_df = pd.read_csv('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/02_01_karachi_crime_2020_2025_cleaned.csv')
 
 # -----------------------------
 # Feature selection for clustering
@@ -31,7 +31,7 @@ plt.xlabel('Number of clusters (k)')
 plt.ylabel('Inertia')
 plt.title('Elbow Method')
 plt.show()
-plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/elbow_method.png')
+plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/03_01_elbow_method.png')
 
 # - Silhouette Analysis: Validate the quality and separation of clusters
 X_sample = X.sample(n=3000, random_state=42) # Sample data for efficiency
@@ -50,7 +50,7 @@ plt.xlabel('Number of clusters (k)')
 plt.ylabel('Silhouette Score')
 plt.title('Silhouette Analysis')
 plt.show()
-plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/silhouette_analysis.png')
+plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/03_02_silhouette_analysis.png')
 
 # -----------------------------
 # Clustering
@@ -121,7 +121,7 @@ plt.legend()
 plt.show()
 
 # Save figure
-plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/crime_clusters_hotspots.png')
+plt.savefig('/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/visuals/03_03_crime_clusters_hotspots.png')
 
 # -----------------------------
 # Interpretation
@@ -198,17 +198,17 @@ top_high_risk_towns
 # -----------------------------
 # Save clustered dataset
 le_df.to_csv(
-    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_with_clusters.csv',
+    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/03_01_karachi_crime_2020_2025_with_clusters.csv',
     index=False
 )
 
 # Save hotspot summary
 cluster_analysis.to_csv(
-    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/karachi_crime_2020_2025_cluster_summary.csv',
+    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/03_02_karachi_crime_2020_2025_cluster_summary.csv',
     index=False
 )
 
 top_towns_per_cluster.to_csv(
-    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/top_towns_per_cluster.csv',
+    '/Users/shoaibhassan/Desktop/AI/PythonProjects/crime-data-analysis-&-hotspot-detection/data-processed/03_03_top_towns_per_cluster.csv',
     index=False
 )

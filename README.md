@@ -42,11 +42,11 @@ Overall crime rank
 
 ## Data Preprocessing & Feature Engineering
 Before analysis and modeling, the following preprocessing steps are applied:
-**Data cleaning**: Handling missing or invalid values and removing duplicate records.
-**Data type optimization**: Converting date fields to datetime format, casting categorical attributes to categorical type.
-**Categorical feature encoding**: Encoding incident type, location, and temporal categories for machine learning models.
-**Numerical feature processing**: Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
-**Feature engineering**: Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
+**Data Cleaning**: Handling missing or invalid values and removing duplicate records.
+**Data Type Optimization**: Converting date fields to datetime format, casting categorical attributes to categorical type.
+**Categorical Feature Encoding**: Encoding incident type, location, and temporal categories for machine learning models.
+**Numerical Feature Processing**: Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
+**Feature Engineering**: Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
 
 These steps ensure data consistency, realism in synthetic patterns, and improved performance of crime pattern analysis and hotspot detection models.
 
@@ -89,13 +89,14 @@ Classification is used to predict whether a crime incident is of high, medium, o
 ---
 
 ### 3️⃣ Trend Mining
-Trend analysis is performed to analyze crime patterns over time, including:
+Trend analysis was performed to uncover temporal crime patterns:
+- **Crime Frequency by Day of the Week**: Revealed which weekdays have higher incidents.
+- **Monthly Crime Trends**: Identified seasonal patterns within each year.
+- **Yearly Crime Trends**: highlighted increasing or decreasing trends over the years.
+- **Month vs Year Heatmap**: → provided a detailed view of crime distribution across.
+- **Top Crime Types**: highlighted the most frequent crimes in Karachi.
 
-- Crime frequency by day of the week
-- Crime occurrence by hour of the day
-- Monthly or seasonal crime trends
-
-These trends help identify peak crime periods.
+These insights help authorities prioritize interventions based on both **time** and **crime type**.
 
 ---
 

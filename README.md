@@ -100,76 +100,95 @@ These insights help authorities prioritize interventions based on both **time** 
 
 ---
 
-## 🗄️ Data Warehouse Design
-To support analytical reporting, a **star schema** is designed.
+## Data Warehouse Design
+To support analytical reporting and multidimensional analysis, a star schema–based data warehouse is designed and implemented using PostgreSQL (Supabase).
 
-### 📊 Fact Table: `Crime_Fact`
-- Crime_ID  
-- Time_Key  
-- Location_Key  
-- CrimeType_Key  
-- Severity  
+### Fact Table: `Crime_Fact`
+Stores measurable crime events and links to dimension tables.
+- Crime_Fact_ID
+- Time_ID
+- Location_ID
+- CrimeType_ID
+- severity_score
+- is_peak_hour
+- is_weekend
+- zone_indicator
+- cluster_label (reserved for ML hotspot linkage)
 
-### 🧱 Dimension Tables
+### Dimension Tables
 
 #### `Time_Dim`
-- Time_Key  
-- Hour  
-- Day  
-- Weekday / Weekend  
+Captures temporal attributes for trend analysis.
+- Time_ID
+- date
+- hour
+- day_of_week
+- month
+- year
+- is_peak_hour
+- is_weekend
 
 #### `Location_Dim`
-- Location_Key  
-- Area_Name  
-- City  
-- Zone  
+Stores spatial and administrative location details.
+- Location_ID
+- town
+- subdivision
+- latitude
+- longitude
+- risk_zone
 
 #### `CrimeType_Dim`
-- CrimeType_Key  
-- Crime_Type  
-- Category  
+Defines crime categories and severity labels.
+- CrimeType_ID
+- crime_type
+- severity
 
-This schema enables efficient multidimensional analysis of crime data.
-
----
-
-## 🛠️ Tools and Technologies Used
-- Python
-- NumPy
-- Pandas
-- Matplotlib
-- scikit-learn
-- CSV files (for data storage and warehouse simulation)
+This schema enables efficient slice-and-dice analysis across time, location, crime type, and severity.
 
 ---
 
-## 📈 Results and Visualizations
-The following visualizations are generated:
-- Crime frequency by location
-- Crime occurrence by time of day
-- Cluster visualization showing crime hotspots
-- Crime severity distribution charts
-
-These visualizations support analytical insights derived from the data.
-
----
-
-## ✅ Conclusion
-This project demonstrates how data mining and data warehousing techniques can be effectively applied to crime data analysis. By identifying crime hotspots, predicting crime severity, and analyzing temporal trends, the project provides meaningful insights that can assist law enforcement agencies and policymakers.
-
-The integration of a data warehouse schema further enables structured and scalable crime data analysis.
+## Tools and Technologies Used
+- Python (Pandas, NumPy)
+- Machine Learning (scikit-learn: K-Means, Random Forest)
+- Data Visualization (Matplotlib)
+- PostgreSQL (Supabase)
+- SQL (Star Schema, Views, Aggregations)
+- Git & GitHub
 
 ---
 
-## 🚀 Future Enhancements
-- Incorporate real-time crime data
-- Use advanced clustering techniques (DBSCAN, Hierarchical Clustering)
-- Add geographical visualizations using maps
-- Integrate SQL-based warehouse querying
+## Results and Visualizations
+The project generates analytical insights through:
+- Monthly crime trends by severity
+- Top towns with high-severity crimes
+- Peak vs non-peak hour crime analysis
+- Crime hotspot detection using spatial clustering
+- Feature importance analysis for crime severity prediction
+
+These visualizations and SQL views support data-driven decision-making and crime pattern analysis.
 
 ---
 
-## 📚 References
+## Conclusion
+This project demonstrates the practical application of data mining and data warehousing techniques on real-world–style crime data. By combining machine learning models with a structured PostgreSQL data warehouse, the system enables:
+- Identification of crime hotspots
+- Prediction of crime severity levels
+- Temporal and spatial trend analysis
+
+The warehouse design ensures scalability, structured querying, and reproducible analytics.
+
+---
+
+## Future Enhancements
+- Populate and analyze cluster_label directly within the warehouse
+- Integrate interactive dashboards (Streamlit / Plotly)
+- Apply advanced clustering techniques (DBSCAN, HDBSCAN)
+- Add geospatial visualizations using maps
+- Incorporate real-time or streaming crime data
+
+---
+
+## References
 - scikit-learn Documentation  
-- Open Government Crime Data Portals  
-- Data Mining and Data Warehousing Textbooks  
+- PostgreSQL & Supabase Documentation
+- Data Mining and Data Warehousing textbooks

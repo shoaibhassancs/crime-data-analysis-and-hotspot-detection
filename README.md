@@ -136,53 +136,6 @@ This schema enables efficient slice-and-dice analysis across time, location, cri
 
 ---
 
-### Star Schema Diagram
-```mermaid
-erDiagram
-    Crime_Fact {
-        int Crime_Fact_ID PK
-        int Time_ID FK
-        int Location_ID FK
-        int CrimeType_ID FK
-        int severity_score
-        boolean is_peak_hour
-        boolean is_weekend
-        string zone_indicator
-        int cluster_label
-    }
-
-    Time_Dim {
-        int Time_ID PK
-        date date
-        int hour
-        int day_of_week
-        int month
-        int year
-        boolean is_peak_hour
-        boolean is_weekend
-    }
-
-    Location_Dim {
-        int Location_ID PK
-        string town
-        string subdivision
-        float latitude
-        float longitude
-        string risk_zone
-    }
-
-    CrimeType_Dim {
-        int CrimeType_ID PK
-        string crime_type
-        string severity
-    }
-
-    Crime_Fact }o--|| Time_Dim : references
-    Crime_Fact }o--|| Location_Dim : references
-    Crime_Fact }o--|| CrimeType_Dim : references
-
----
-
 ## Tools and Technologies Used
 - Python (Pandas, NumPy)
 - Machine Learning (scikit-learn: K-Means, Random Forest)
@@ -228,3 +181,50 @@ The star schema ensures structured, scalable, and reproducible analytics.
 - scikit-learn Documentation  
 - PostgreSQL & Supabase Documentation
 - Data Mining and Data Warehousing textbooks
+
+---
+
+### Star Schema Diagram
+```mermaid
+erDiagram
+    Crime_Fact {
+        int Crime_Fact_ID PK
+        int Time_ID FK
+        int Location_ID FK
+        int CrimeType_ID FK
+        int severity_score
+        boolean is_peak_hour
+        boolean is_weekend
+        string zone_indicator
+        int cluster_label
+    }
+
+    Time_Dim {
+        int Time_ID PK
+        date date
+        int hour
+        int day_of_week
+        int month
+        int year
+        boolean is_peak_hour
+        boolean is_weekend
+    }
+
+    Location_Dim {
+        int Location_ID PK
+        string town
+        string subdivision
+        float latitude
+        float longitude
+        string risk_zone
+    }
+
+    CrimeType_Dim {
+        int CrimeType_ID PK
+        string crime_type
+        string severity
+    }
+
+    Crime_Fact }o--|| Time_Dim : references
+    Crime_Fact }o--|| Location_Dim : references
+    Crime_Fact }o--|| CrimeType_Dim : references

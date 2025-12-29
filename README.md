@@ -95,14 +95,14 @@ Covers crimes reported in Karachi from 2020–2025, including:
 ### Project Pipeline Flowchart
 ```mermaid
 flowchart TD
-    A[Dataset: karachi_crime_2020_2025] --> B[Data Preprocessing & Feature Engineering]
-    B --> C1[Clustering: K-Means (Hotspot Detection)]
-    B --> C2[Classification: Random Forest (Severity Prediction)]
+    A[Dataset karachi_crime_2020_2025] --> B[Data Preprocessing and Feature Engineering]
+    B --> C1[Clustering K-Means Hotspot Detection]
+    B --> C2[Classification Random Forest Severity Prediction]
     C1 --> D1[Crime Hotspots Map]
     C2 --> D2[Severity Prediction Results]
-    D1 --> E[Data Warehouse: Star Schema]
+    D1 --> E[Data Warehouse Star Schema]
     D2 --> E
-    E --> F[Analytics & Visualizations]
+    E --> F[Analytics and Visualizations]
 ```
 
 ## Data Warehouse Design

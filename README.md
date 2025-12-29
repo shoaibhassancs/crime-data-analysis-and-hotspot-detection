@@ -181,6 +181,8 @@ erDiagram
     Crime_Fact }o--|| Location_Dim : references
     Crime_Fact }o--|| CrimeType_Dim : references
 
+---
+
 ## Tools and Technologies Used
 - Python (Pandas, NumPy)
 - Machine Learning (scikit-learn: K-Means, Random Forest)

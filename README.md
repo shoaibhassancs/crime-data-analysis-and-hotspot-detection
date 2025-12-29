@@ -1,5 +1,8 @@
 # Crime Data Analysis & Hotspot Detection
 
+🔗 **GitHub Repository**:  
+https://github.com/shoaibhassancs/crime-data-analysis-and-hotspot-detection
+
 ## Project Overview
 Crime analysis plays a vital role in public safety and urban planning. With the increasing availability of crime-related data, data mining techniques can be applied to uncover hidden patterns, crime hotspots, and temporal trends.
 
@@ -22,129 +25,111 @@ The objectives of this project are to:
 ---
 
 ## Dataset Description
-Each record in the dataset represents a single reported crime incident in Karachi. The dataset, karachi_crime_2020_2025, is obtained from Kaggle and covers crimes reported between 2020 and 2025. It captures spatial, temporal, and severity information of various crime incidents, suitable for academic purposes, exploratory data analysis, and predictive modeling.
+Dataset: `karachi_crime_2020_2025` (from Kaggle)  
+Covers crimes reported in Karachi from 2020–2025, including:
+- Spatial data (town, subdivision, latitude, longitude)
+- Temporal data (date, hour, day of week)
+- Severity scores and zone indicators
 
-## Features Used
-**Incident Type**: Type of crime (e.g., theft, robbery, assault)
-**Geographical Location**: Area where the incident occurred (town, subdivision, latitude, longitude)
-**Temporal Attributes**:
-Date of occurrence
-Time of occurrence (hour)
-Day of the week
-**Severity Score**: Numeric score representing the seriousness of the crime
-**Zone Indicators**: Binary flags representing crime zones (Red, Orange, Yellow, Green, White)
-**Priority & Rank Metrics**:
-Town priority rank
-Subdivision priority rank
-Overall crime rank
+**Features Used**
+- **Incident Type**: Type of crime (e.g., theft, robbery, assault)  
+- **Geographical Location**: Town, subdivision, latitude, longitude  
+- **Temporal Attributes**:
+  - Date of occurrence
+  - Hour
+  - Day of the week
+- **Severity Score**: Numeric measure of crime seriousness  
+- **Zone Indicators**: Red, Orange, Yellow, Green, White  
+- **Priority Metrics**:
+  - Town priority rank
+  - Subdivision priority rank
+  - Overall crime rank
 
 ---
 
 ## Data Preprocessing & Feature Engineering
-Before analysis and modeling, the following preprocessing steps are applied:
-**Data Cleaning**: Handling missing or invalid values and removing duplicate records.
-**Data Type Optimization**: Converting date fields to datetime format, casting categorical attributes to categorical type.
-**Categorical Feature Encoding**: Encoding incident type, location, and temporal categories for machine learning models.
-**Numerical Feature Processing**: Scaling and normalization of numeric attributes (e.g., severity score, priority ranks).
-**Feature Engineering**: Deriving temporal features from the date column (year, month, day of the week, peak/off-peak hours, weekend/weekday), and creating binary zone indicators for hotspot analysis.
-
-These steps ensure data consistency, realism in synthetic patterns, and improved performance of crime pattern analysis and hotspot detection models.
+- **Data Cleaning**: Handling missing/invalid values, removing duplicates  
+- **Data Type Optimization**: Convert dates, cast categorical features  
+- **Encoding**: Encode incident type, location, temporal features  
+- **Numerical Processing**: Scale/normalize severity and rank metrics  
+- **Feature Engineering**: Derived temporal features (year, month, day_of_week, peak/off-peak, weekend/weekday) and binary zone indicators
 
 ---
 
 ## Data Mining Techniques
 
 ### Clustering – Crime Hotspot Detection
-Clustering is used to identify crime hotspots without predefined labels.
-
-- **Algorithm Used**: K-Means Clustering
-- **Features Used for Clustering**:
-  - Location (Latitude, Longitude)
-
-**Outcome**:
-- Identification of high-crime zones (hotspots)
-- Ranking clusters by crime intensity
-- Linking clusters to towns/subdivisions for actionable insights
-
----
+- **Algorithm**: K-Means Clustering  
+- **Features Used**: Latitude, Longitude  
+- **Outcome**:
+  - Identify high-crime zones (hotspots)
+  - Rank clusters by crime intensity
+  - Link clusters to towns/subdivisions for actionable insights
 
 ### Classification – Crime Severity Prediction
-Classification is used to predict whether a crime incident is of high, medium, or low severity.
-
-- **Target Variable**: SEVERITY (High / Medium / Low)
-- **Algorithms Used**: Random Forest Classifier (with class balancing to handle class imbalance)
+- **Target Variable**: SEVERITY (High / Medium / Low)  
+- **Algorithm**: Random Forest Classifier (with class balancing)  
 - **Features Used**:
-  -  Location: LATITUDE, LONGITUDE
-  -  Crime details: CRIME_TYPE, TOWN, SUBDIVISION
-  -  Temporal: HOUR, DAY_OF_WEEK, MONTH, IS_PEAK_HOUR, IS_WEEKEND
+  - Location: LATITUDE, LONGITUDE  
+  - Crime details: CRIME_TYPE, TOWN, SUBDIVISION  
+  - Temporal: HOUR, DAY_OF_WEEK, MONTH, IS_PEAK_HOUR, IS_WEEKEND  
 - **Evaluation Metrics**:
   - Accuracy (~86%)
   - Confusion Matrix
-  - Classification Report (Precision, Recall, F1-score)
+  - Precision, Recall, F1-score  
 
 **Insights**:
-  - Random Forest identified which features most influence severity.
-  - Model performs well across all classes, enabling prioritization of high-severity crimes.
-
----
+- Random Forest identifies key features influencing severity  
+- Enables prioritization of high-severity crimes
 
 ### Trend Mining
-Trend analysis was performed to uncover temporal crime patterns:
-- **Crime Frequency by Day of the Week**: Revealed which weekdays have higher incidents.
-- **Monthly Crime Trends**: Identified seasonal patterns within each year.
-- **Yearly Crime Trends**: highlighted increasing or decreasing trends over the years.
-- **Month vs Year Heatmap**: → provided a detailed view of crime distribution across.
-- **Top Crime Types**: highlighted the most frequent crimes in Karachi.
+- Crime frequency by day of the week  
+- Monthly and yearly crime trends  
+- Month vs year heatmap  
+- Top crime types in Karachi  
 
-These insights help authorities prioritize interventions based on both **time** and **crime type**.
+**Insights**: Supports temporal and spatial decision-making for law enforcement
 
 ---
 
 ## Data Warehouse Design
-To support analytical reporting and multidimensional analysis, a star schema–based data warehouse is designed and implemented using PostgreSQL (Supabase).
-
-## 🗄️ Data Warehouse Design
-
-The project uses a **star schema** to support analytical queries and reporting.
+To support analytical reporting and multidimensional analysis, a **star schema**–based data warehouse is implemented using PostgreSQL (Supabase).
 
 ### Fact Table: `Crime_Fact`
-Stores measurable crime events and links to dimension tables.
-- Crime_Fact_ID
-- Time_ID
-- Location_ID
-- CrimeType_ID
-- severity_score
-- is_peak_hour
-- is_weekend
-- zone_indicator
-- cluster_label (reserved for ML hotspot linkage)
+Stores measurable crime events and links to dimension tables:
+- Crime_Fact_ID  
+- Time_ID  
+- Location_ID  
+- CrimeType_ID  
+- severity_score  
+- is_peak_hour  
+- is_weekend  
+- zone_indicator  
+- cluster_label (for ML hotspots)
 
 ### Dimension Tables
 
 #### `Time_Dim`
-Captures temporal attributes for trend analysis.
-- Time_ID
-- date
-- hour
-- day_of_week
-- month
-- year
-- is_peak_hour
+- Time_ID  
+- date  
+- hour  
+- day_of_week  
+- month  
+- year  
+- is_peak_hour  
 - is_weekend
 
 #### `Location_Dim`
-Stores spatial and administrative location details.
-- Location_ID
-- town
-- subdivision
-- latitude
-- longitude
+- Location_ID  
+- town  
+- subdivision  
+- latitude  
+- longitude  
 - risk_zone
 
 #### `CrimeType_Dim`
-Defines crime categories and severity labels.
-- CrimeType_ID
-- crime_type
+- CrimeType_ID  
+- crime_type  
 - severity
 
 This schema enables efficient slice-and-dice analysis across time, location, crime type, and severity.
@@ -152,7 +137,6 @@ This schema enables efficient slice-and-dice analysis across time, location, cri
 ---
 
 ### Star Schema Diagram
-
 ```mermaid
 erDiagram
     Crime_Fact {
@@ -197,7 +181,6 @@ erDiagram
     Crime_Fact }o--|| Location_Dim : references
     Crime_Fact }o--|| CrimeType_Dim : references
 
-
 ## Tools and Technologies Used
 - Python (Pandas, NumPy)
 - Machine Learning (scikit-learn: K-Means, Random Forest)
@@ -221,12 +204,12 @@ These visualizations and SQL views support data-driven decision-making and crime
 ---
 
 ## Conclusion
-This project demonstrates the practical application of data mining and data warehousing techniques on real-world–style crime data. By combining machine learning models with a structured PostgreSQL data warehouse, the system enables:
+This project demonstrates how data mining and data warehousing techniques can be applied to crime data for:
 - Identification of crime hotspots
 - Prediction of crime severity levels
 - Temporal and spatial trend analysis
 
-The warehouse design ensures scalability, structured querying, and reproducible analytics.
+The star schema ensures structured, scalable, and reproducible analytics.
 
 ---
 

@@ -92,6 +92,19 @@ Covers crimes reported in Karachi from 2020–2025, including:
 
 ---
 
+### Project Pipeline Flowchart
+```mermaid
+flowchart TD
+    A[Dataset: karachi_crime_2020_2025] --> B[Data Preprocessing & Feature Engineering]
+    B --> C1[Clustering: K-Means (Hotspot Detection)]
+    B --> C2[Classification: Random Forest (Severity Prediction)]
+    C1 --> D1[Crime Hotspots Map]
+    C2 --> D2[Severity Prediction Results]
+    D1 --> E[Data Warehouse: Star Schema]
+    D2 --> E
+    E --> F[Analytics & Visualizations]
+```
+
 ## Data Warehouse Design
 To support analytical reporting and multidimensional analysis, a **star schema**–based data warehouse is implemented using PostgreSQL (Supabase).
 
@@ -133,54 +146,6 @@ Stores measurable crime events and links to dimension tables:
 - severity
 
 This schema enables efficient slice-and-dice analysis across time, location, crime type, and severity.
-
----
-
-## Tools and Technologies Used
-- Python (Pandas, NumPy)
-- Machine Learning (scikit-learn: K-Means, Random Forest)
-- Data Visualization (Matplotlib)
-- PostgreSQL (Supabase)
-- SQL (Star Schema, Views, Aggregations)
-- Git & GitHub
-
----
-
-## Results and Visualizations
-The project generates analytical insights through:
-- Monthly crime trends by severity
-- Top towns with high-severity crimes
-- Peak vs non-peak hour crime analysis
-- Crime hotspot detection using spatial clustering
-- Feature importance analysis for crime severity prediction
-
-These visualizations and SQL views support data-driven decision-making and crime pattern analysis.
-
----
-
-## Conclusion
-This project demonstrates how data mining and data warehousing techniques can be applied to crime data for:
-- Identification of crime hotspots
-- Prediction of crime severity levels
-- Temporal and spatial trend analysis
-
-The star schema ensures structured, scalable, and reproducible analytics.
-
----
-
-## Future Enhancements
-- Populate and analyze cluster_label directly within the warehouse
-- Integrate interactive dashboards (Streamlit / Plotly)
-- Apply advanced clustering techniques (DBSCAN, HDBSCAN)
-- Add geospatial visualizations using maps
-- Incorporate real-time or streaming crime data
-
----
-
-## References
-- scikit-learn Documentation  
-- PostgreSQL & Supabase Documentation
-- Data Mining and Data Warehousing textbooks
 
 ---
 
@@ -228,3 +193,50 @@ erDiagram
     Crime_Fact }o--|| Time_Dim : references
     Crime_Fact }o--|| Location_Dim : references
     Crime_Fact }o--|| CrimeType_Dim : references
+```
+
+## Tools and Technologies Used
+- Python (Pandas, NumPy)
+- Machine Learning (scikit-learn: K-Means, Random Forest)
+- Data Visualization (Matplotlib)
+- PostgreSQL (Supabase)
+- SQL (Star Schema, Views, Aggregations)
+- Git & GitHub
+
+---
+
+## Results and Visualizations
+The project generates analytical insights through:
+- Monthly crime trends by severity
+- Top towns with high-severity crimes
+- Peak vs non-peak hour crime analysis
+- Crime hotspot detection using spatial clustering
+- Feature importance analysis for crime severity prediction
+
+These visualizations and SQL views support data-driven decision-making and crime pattern analysis.
+
+---
+
+## Conclusion
+This project demonstrates how data mining and data warehousing techniques can be applied to crime data for:
+- Identification of crime hotspots
+- Prediction of crime severity levels
+- Temporal and spatial trend analysis
+
+The star schema ensures structured, scalable, and reproducible analytics.
+
+---
+
+## Future Enhancements
+- Populate and analyze cluster_label directly within the warehouse
+- Integrate interactive dashboards (Streamlit / Plotly)
+- Apply advanced clustering techniques (DBSCAN, HDBSCAN)
+- Add geospatial visualizations using maps
+- Incorporate real-time or streaming crime data
+
+---
+
+## References
+- scikit-learn Documentation  
+- PostgreSQL & Supabase Documentation
+- Data Mining and Data Warehousing textbooks
